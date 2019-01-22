@@ -15,7 +15,10 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet">
-
+    <script
+        src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
     @stack('stylesheets')
 
 </head>
@@ -27,11 +30,10 @@
     </div>
 </div>
 
+@yield('script')
 <script>
     var CSRF_TOKEN = '{{ csrf_token() }}';
 </script>
-<script src="{{ asset("js/vendor.js") }}"></script>
-<script src="{{ asset("js/main.js") }}"></script>
 <script type="text/javascript">
     $.ajaxSetup({
         headers: {

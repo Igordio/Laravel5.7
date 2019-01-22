@@ -15,4 +15,5 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::resource('users', 'UserController');
+Route::resource('users', 'UserController')->except('show', 'destroy');
+Route::post('users/{user}/destroy' ,'UserController@destroy');

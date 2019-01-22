@@ -38,10 +38,16 @@
                                                 'Visited': {{ $item->visited_at }}<br>
                                             </td>-->
                                             <td>
-                                                <a href="{{ route('users.edit', ['id'=>$item->id]) }}" title="'Edit')">
+                                                <a href="{{ route('users.edit', ['id'=>$item->id]) }}" title="Edit">
                                                     <button class="btn btn-primary btn-sm">
                                                         <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                                         Edit
+                                                    </button>
+                                                </a>
+                                                <a href="#" data-id="{{$item->id}}" title="Delete" class="delete">
+                                                    <button class="btn btn-danger btn-sm">
+                                                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                                        Delete
                                                     </button>
                                                 </a>
                                             </td>
@@ -56,4 +62,28 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('script')
+    <script>
+        $(document)
+            .on('click', '.delete', deleteUser);
+
+        function deleteUser(e) {
+            e.preventDefault();
+            $.ajax({
+                url: 'users/'+ $(this).data('id') +'/destroy',
+                type: "post",
+                success: function (response) {
+                    if(response == 'success') {
+                        window.location.reload();
+                    }
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    console.log(textStatus, errorThrown);
+                }
+            });
+            return false;
+        }
+    </script>
 @endsection
