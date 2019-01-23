@@ -63,27 +63,3 @@
         </div>
     </div>
 @endsection
-
-@section('script')
-    <script>
-        $(document)
-            .on('click', '.delete', deleteUser);
-
-        function deleteUser(e) {
-            e.preventDefault();
-            $.ajax({
-                url: 'users/'+ $(this).data('id') +'/destroy',
-                type: "post",
-                success: function (response) {
-                    if(response == 'success') {
-                        window.location.reload();
-                    }
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    console.log(textStatus, errorThrown);
-                }
-            });
-            return false;
-        }
-    </script>
-@endsection
