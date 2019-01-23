@@ -44,12 +44,12 @@
                                                         Edit
                                                     </button>
                                                 </a>
-                                                <a href="#" data-id="{{$item->id}}" title="Delete" class="delete">
-                                                    <button class="btn btn-danger btn-sm">
-                                                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                                                        Delete
-                                                    </button>
-                                                </a>
+                                                <form method="post" action="{{ route('users.destroy', ['id' =>
+                                                $item->id]) }}">
+                                                    {!! csrf_field() !!}
+                                                    <input type="hidden" name="_method" value="delete" />
+                                                    <input type="submit" class="btn btn-danger btn-sm" value="Delete">
+                                                </form>
                                             </td>
                                         </tr>
                                     @endforeach
