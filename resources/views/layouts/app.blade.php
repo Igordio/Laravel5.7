@@ -30,8 +30,6 @@
 <script>
     var CSRF_TOKEN = '{{ csrf_token() }}';
 </script>
-<script src="{{ asset("js/vendor.js") }}"></script>
-<script src="{{ asset("js/main.js") }}"></script>
 <script type="text/javascript">
     $.ajaxSetup({
         headers: {

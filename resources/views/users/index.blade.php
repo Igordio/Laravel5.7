@@ -44,6 +44,12 @@
                                                         Edit
                                                     </button>
                                                 </a>
+                                                <form method="post"
+                                                      action="{{ route('users.destroy', ['id'=>$item->id]) }}">
+                                                    {!! csrf_field() !!}
+                                                    <input type="hidden" name="_method" value="delete" />
+                                                    <input type="submit" value="Delete" class="btn btn-danger">
+                                                </form>
                                             </td>
                                         </tr>
                                     @endforeach
