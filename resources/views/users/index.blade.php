@@ -18,6 +18,7 @@
                     <div class="x_panel">
                         <div class="x_content">
                             <div class="table-responsive">
+                                <a class="btn btn-primary" href="{{ route('users.create') }}">+ Add user</a>
                                 <table class="table">
                                     <thead>
                                     <tr>
@@ -39,7 +40,7 @@
                                             </td>-->
                                             <td>
                                                 <a href="{{ route('users.edit', ['id'=>$item->id]) }}" title="'Edit')">
-                                                    <button class="btn btn-primary btn-sm">
+                                                    <button class="btn btn-primary">
                                                         <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                                         Edit
                                                     </button>

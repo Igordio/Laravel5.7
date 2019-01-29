@@ -36,6 +36,14 @@ class UserController extends Controller
     }
 
     /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function create()
+    {
+        return view('users.create');
+    }
+
+    /**
      * @param Request $request
      * @param int $id
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
@@ -50,10 +58,27 @@ class UserController extends Controller
 
     /**
      * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function store (Request $request)
+    {
+        $request->validate([
+            'email' => 'unique:users',
+            'phone' => 'unique:users',
+        ]);
+
+        $user = new User;
+        $user->create($request->all());
+
+        return redirect('users');
+    }
+
+    /**
+     * @param Request $request
      * @param int $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroy(Request $request, int $id)
+    public function destroy(int $id)
     {
         User::find($id)->delete();
 
