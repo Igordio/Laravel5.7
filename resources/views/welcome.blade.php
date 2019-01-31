@@ -81,7 +81,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Laravel
+                    Users Count {{ $user_count }}
                 </div>
 
                 <div class="links">

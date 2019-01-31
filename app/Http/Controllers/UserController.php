@@ -25,6 +25,21 @@ class UserController extends Controller
     }
 
     /**
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function trashedIndex(Request $request)
+    {
+        $data = User::onlyTrashed()->get();
+
+        return view('users.index', [
+            'title' => 'Users',
+            'users' => $data
+
+        ]);
+    }
+
+    /**
      * @param $id
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
@@ -75,12 +90,35 @@ class UserController extends Controller
 
     /**
      * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function restore ($id)
+    {
+        User::onlyTrashed()->where('id', $id)->restore();
+
+        return back();
+    }
+
+    /**
+     * @param Request $request
      * @param int $id
      * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy(int $id)
     {
         User::find($id)->delete();
+
+        return back();
+    }
+
+    /**
+     * @param Request $request
+     * @param int $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function delete(int $id)
+    {
+        User::onlyTrashed()->where('id', $id)->forceDelete();
 
         return back();
     }
