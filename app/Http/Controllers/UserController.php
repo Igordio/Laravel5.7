@@ -10,31 +10,25 @@ class UserController extends Controller
 {
 
     /**
-     * @param Request $request
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function index(Request $request)
+    public function index()
     {
-        $data = User::oldest('id')->get();
-
         return view('users.index', [
             'title' => 'Users',
-            'users' => $data
+            'users' => User::oldest('id')->get()
 
         ]);
     }
 
     /**
-     * @param Request $request
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function trashedIndex(Request $request)
+    public function trashedIndex()
     {
-        $data = User::onlyTrashed()->get();
-
         return view('users.index', [
             'title' => 'Users',
-            'users' => $data
+            'users' => User::onlyTrashed()->get()
 
         ]);
     }
@@ -92,7 +86,7 @@ class UserController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function restore ($id)
+    public function restore (int $id)
     {
         User::onlyTrashed()->where('id', $id)->restore();
 

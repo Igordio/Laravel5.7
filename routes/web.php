@@ -17,5 +17,5 @@ Route::get('/', function () {
 
 Route::resource('users', 'UserController');
 Route::get('trashed-users', 'UserController@trashedIndex');
-Route::post('users/delete/{id}', 'UserController@delete')->name('users.delete');;
-Route::put('users/restore/{id}', 'UserController@restore')->name('users.restore');;
+Route::post('users/delete/{id}', 'UserController@delete')->name('users.delete');
+Route::put('users/restore/{id}', 'UserController@restore')->name('users.restore');
