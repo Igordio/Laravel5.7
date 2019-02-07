@@ -2,8 +2,11 @@
 
 namespace App\Exceptions;
 
+use App\ShortLink;
 use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Support\Facades\DB;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class Handler extends ExceptionHandler
 {
@@ -38,14 +41,23 @@ class Handler extends ExceptionHandler
     }
 
     /**
-     * Render an exception into an HTTP response.
+     * Render an exception into a response.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \Exception  $exception
+     * @param  \Exception  $e
      * @return \Illuminate\Http\Response
      */
-    public function render($request, Exception $exception)
+    public function render($request, Exception $e)
     {
-        return parent::render($request, $exception);
+        if($e instanceof NotFoundHttpException)
+        {
+            $ident = str_replace('/', '', $_SERVER['PATH_INFO']);
+            $link = DB::table('short_links')
+                ->where('ident', $ident)
+                ->first();
+
+            header('Location: ' . $link->url);die;
+        }
+        return parent::render($request, $e);
     }
 }
